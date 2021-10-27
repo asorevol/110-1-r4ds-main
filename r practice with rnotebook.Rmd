@@ -502,6 +502,14 @@ firstShowInfo <- concerts_obo[[2]][["showInfo"]][[1]][c("time","location")]
 
 ```
 
+EX3-3 
+```{r}
+
+concerts_obo[[3]][["showInfo"]][[1]][["time"]] = "2022/01/31 19:30:00"
+concerts_obo[[3]][["showInfo"]][[1]][["location"]] = "Taichung Opera House"
+concerts_obo[[3]][["showInfo"]][[1]][["locationName"]] = "台中歌劇院"
+
+```
 
 
 

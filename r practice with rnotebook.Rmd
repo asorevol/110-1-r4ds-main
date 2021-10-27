@@ -511,6 +511,9 @@ concerts_obo[[3]][["showInfo"]][[1]][["locationName"]] = "台中歌劇院"
 
 ```
 
+```{r}
+concerts_obo[[3]][["showInfo"]][[1]][c(1,2,3)] = list("time"="2022/01/31 19:30:00" , "location" = "Taichung Opera House" , "locationName" = "台中歌劇院")
+```
 
 
 

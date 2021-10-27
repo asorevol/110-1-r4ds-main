@@ -1,0 +1,526 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code.
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*.
+
+## Basic Data Type
+
+```{r}
+"Mary" #double quotation
+'Friday' #single quotation
+'Today is Wednesday' #ONE character value
+```
+
+### Numeric
+
+```{r}
+2 #double 2.000000000
+3.1415928 
+
+2L #save as 2 (save resorse) (but it rarely use)
+
+
+
+
+
+
+```
+
+#### Logical
+
+```{r}
+TRUE=T #capital
+FALSE=F #capital
+
+#but don't put it in "" or ''
+```
+
+##### Collection of Values
+
+```{r}
+"John"
+'Mary'
+
+
+
+```
+
+\#use c( ) if they r the same type
+
+```{r}
+c( " John " , ' Mary ') #atomic
+c( 1 , 4.14 , 300 ) #atomic
+c( T , F ) #atomic
+```
+
+\#if u want to put different type of character together use list()
+
+```{r}
+
+typoof(list("John" , T , 165 ))
+
+```
+
+[[number]] will out put the element which is that number.
+
+```{r}
+
+c("John", "Mary")[[1]]
+
+
+```
+
+```{r}
+
+
+c("John", list("mary" , 35), "Mary")[[2]]
+
+
+```
+
+this is wrong since that the element have no 4th element
+
+```{r}
+
+
+list("John",42, list("Mary", 35))[[4]]
+
+
+```
+
+\#\#2.9
+
+binding
+
+```{r}
+
+personName <- c("Mary" , "Ken")
+personName = c("Mary" , "Ken")
+c("Mary" , "Ken") -> personName
+#these r all the same 
+ 
+```
+
+```{r}
+
+bigList <- list("John",42, list("Mary", 35))
+
+```
+
+```{r}
+
+bigList[[3]][[2]]
+
+```
+
+which is
+
+```{r}
+
+list("John",42, list("Mary", 35))[[3]][[2]]
+
+
+```
+
+what R did is that
+
+```{r}
+
+list("John",42, list("Mary", 35))[[3]]
+#which will show list("Mary", 35)
+
+```
+
+than
+
+```{r}
+
+list("Mary" , 35)[[2]]
+#which will show 35
+
+```
+
+quiz
+
+```{r}
+
+list("John", 42, 
+  list("Mary", 35,
+    c(1, 22, 53))
+  )[[3]][[3]][[2]]
+
+
+
+```
+
+\#\#2-10
+
+```{r}
+
+c(c('a' , 'b' ) , 'c')
+#which will break the c() inside the 
+#c()
+
+```
+
+as the result
+
+```{r}
+
+c(c('a','b'), c('c','d'))
+
+
+```
+
+if u want to extract "d"
+
+u can't just do
+
+```{r}
+
+c(c('a','b'), c('c','d'))[[2]][[2]]
+
+```
+
+what u need to type is
+
+```{r}
+
+c(c('a','b'), c('c','d'))[[4]]
+
+
+```
+
+but list will not break the c()
+
+quiz
+
+```{r}
+
+
+list(c("a", "b"), c("c", "d"))[[2]][[2]]
+
+```
+
+so
+
+```{r}
+
+c(list("a", 1), list("c", 2))[[4]]
+
+```
+
+will go into
+
+```{r}
+
+c('a' , "1" , 'c' , "2")[[4]]
+
+```
+
+but this is a problem that
+
+the number 1and 2 will become a chracter but a number which can not do any math!!!\
+(since c() can only type the same stuff
+
+prob if c( list( 1 , 2 ) , list( 3 , 4 ) )
+
+```{r}
+
+c( list( 1 , 2 ) , list( 3 , 4 ) )
+
+```
+
+2-12
+
+Four feature
+
+age , gender , income , resident
+
+```{r}
+
+A <- list(54,"male","north",100)
+B <- list(32,"female","south",25)
+C <- list(28,"female","east", NA)
+#if there is a data without than we use NA to show.
+D <- list(20,"male","east",77)
+```
+
+```{r}
+
+data_set <- list(A,B,C,D)
+
+```
+
+and we don't use
+
+```{r}
+
+c(
+  list(54, "male", "north", 100),
+  list(  32, "female", "south", 25),
+  list(  28, "female", "east", NA),
+  list(  20, "male", "east", 77))
+)
+
+```
+
+will be the same as
+
+```{r}
+
+list(54, "male", "north", 100, 
+  32, "female", "south", 25,
+  28, "female", "east", NA, 
+  20, "male", "east", 77)
+
+```
+
+Name elements values
+
+```{r}
+
+c("John" = 177 , "Mary" = 160 , "Bill" = 170 )[["John"]]
+#atomic vector
+
+
+```
+
+\# If u want to give element value always use "=" !!
+
+!!
+
+```{r}
+
+list(
+  list( age=54, gender="male", region="north", income=100),
+  list(  age=32, gender="female", region="south", income=25),
+  list(  age=28, gender="female", region="east", income=NA),
+  list(  age=20, gender="male", region="east", income=77)
+)-> simpledata #binding
+
+simpledata[[2]][["income"]]
+# if u want to extract the vaule out u need to type 
+# "the name of it"
+
+
+```
+
+the mean of it is like
+
+```{r}
+
+simpledata[[2]][["income"]]#second part and the value "income" in the binding simpledata
+
+```
+
+the thing that list() can do "\$"
+
+```{r}
+
+list(
+  "personA"=list( age=54, gender="male", region="north", income=100),
+  "personB"=list(  age=32, gender="female", region="south", income=25),
+  "personC"=list(  age=28, gender="female", region="east", income=NA),
+  "personD"=list(  age=20, gender="male", region="east", income=77)
+)-> simpledata #binding
+
+simpledata$personB[["gender"]]
+
+
+```
+
+and the "\$" have one advantage is that u will have a list if u type ur binding.
+
+Calculus , Mon 5\~7 , Business1F09
+
+Politics , Fri 5\~6 , Law2F28
+
+```{r}
+list(
+  list(
+    time= "Mon 5~7",
+    place="business1F09"
+      ) -> Calculus ,
+  list(
+    time="Fri 5~6",
+    place="law2F28"
+      ) -> Politics
+) 
+
+simple$Calculus[["time"]]
+
+
+
+```
+
+```{r}
+
+list(
+  "Calculus"=list(
+  time= "Mon 5~7",
+  place="business1F09"
+),
+
+  "Politics"=list(
+  time="Fri 5~6",
+  place="law2F28"
+)
+)
+
+```
+
+## list with a title
+
+```{r}
+
+list(
+  Compulsory = 
+    list("Principle of Economics", 
+      "Calculus", 
+      "Accounting"), #u can use c() though ur stuff need to b same element
+  Selective = 
+    list("Philosophy", 
+      "Chinese Literature")
+)
+
+```
+
+## import Json
+F1
+
+```{r}
+
+# Observation by observation
+concerts_obo <-
+  jsonlite::fromJSON("https://cloud.culture.tw/frontsite/trans/SearchShowAction.do?method=doFindTypeJ&category=17", simplifyDataFrame = F)
+
+# Feature by feature
+concerts_fbf <-
+  jsonlite::fromJSON("https://cloud.culture.tw/frontsite/trans/SearchShowAction.do?method=doFindTypeJ&category=17", simplifyDataFrame = T)
+
+```
+what this "TRUE and FAUSE" about is that u bind these two stuff. than u can just call them use it later.
+
+obo is more easier to understand but fbf is easier to write though it's massive size.
+
+3-2
+
+c out 
+which can use [["name"]] or [[number]]
+or [[c(1,2,5)]] [["name1","name2"]]
+```{r}
+
+JohnsFamily <-
+  list(
+    name = "John", 
+    age = 35,
+    spouse = list(
+      name = "Mary", 
+      age = 32),
+    children = list(
+      list(
+        name = "Bill", 
+        age = 5),
+      list(
+        name = "Jane", 
+        age = 3)
+    )
+  )
+JohnsFamily[["children"]][[1]][["age"]]
+#if u want to know Bill's age
+
+```
+if u want to know the imformation of the length
+
+```{r}
+
+  
+  length(JohnsFamily) 
+  length(list(
+    name = "John", 
+    age = 35,
+    spouse = list(
+      name = "Mary", 
+      age = 32),
+    children = list(
+      list(
+        name = "Bill", 
+        age = 5),
+      list(
+        name = "Jane", 
+        age = 3)
+    ))
+  )
+
+```
+check the element nome 
+```{r}
+
+names(JohnsFamily)
+
+```
+
+```{r}
+
+fncallExample <- list("John", 35, covid19Positive=FALSE)
+length(fncallExample)
+names(fncallExample)
+
+```
+```{r}
+
+Sys.Date() #show the date today
+
+```
+
+```{r}
+Sys.time()
+```
+
+```{r}
+car() #
+```
+
+if i want to know JohmsFamily's name and age
+```{r}
+
+JohnsFamily[c(1,2)] #if u use list() at start u will get a list() when u do this
+JohnsFamily[c( "name" , "age" )]
+
+```
+
+EX
+```{r}
+
+concerts_sampled <- concerts_obo[c(3,5)] 
+firstShowInfo <- concerts_obo[[2]][["showInfo"]][[1]][c("time","location")]
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.

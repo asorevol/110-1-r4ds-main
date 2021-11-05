@@ -515,7 +515,57 @@ concerts_obo[[3]][["showInfo"]][[1]][["locationName"]] = "台中歌劇院"
 concerts_obo[[3]][["showInfo"]][[1]][c(1,2,3)] = list("time"="2022/01/31 19:30:00" , "location" = "Taichung Opera House" , "locationName" = "台中歌劇院")
 ```
 
+EX3-4
+```{r}
 
+JohnsFamilyCopy3 <- JohnsFamily
+JohnsFamilyCopy3$children[3] <- list(name="new born", age=0)
+
+```
+##class 10/27
+#there is a prob that i can't inport the csv file into my dumb r-studio so i just skip it for a min
+
+##API
+#import the online data into ur Rmd file
+```{r}
+install.packages("httr")
+```
+
+```{r}
+
+mrtStationAds <- 
+  httr::content(httr::GET("https://data.taipei/api/v1/dataset/91290609-2b8b-4130-8ce9-e6085529bc46?scope=resourceAquire&limit=1000"))
+
+```
+#easy to say is that the code before ? is the information that we try to import into rmd. and the thing after that is some setting that help us to understand or select the part we want. which separate with &.
+
+#in a easy way to explain the code
+```{r}
+
+mrtStationAds <- #this one is to choose what thing u want to bind
+  httr::content(httr::GET("https://data.taipei/api/v1/dataset/91290609-2b8b-4130-8ce9-e6085529bc46?scope=resourceAquire&limit=1000"))
+#this one is to choose the link u want to bind
+
+```
+
+11/3
+
+u can use str() to show the type of element
+
+```{r}
+
+str(concerts_obo[[3]][["showInfo"]][[1]])
+
+```
+
+pipe 
+
+```{r}
+
+concerts_obo[[3]][["showInfo"]][[1]] |> 
+  str()
+
+```
 
 
 
